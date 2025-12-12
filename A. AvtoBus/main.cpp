@@ -9,10 +9,7 @@ int main(){
     long long tt;cin>>tt;
     while(tt--){
         long long n;cin>>n;
-        if((!(n%4))){
-            if(!(n%6))cout<<n/6<<" "<<n/4<<endl;
-            else cout<<((n/6)+((n%6)/4))<<" "<<n/4<<endl;
-        }
+        if((n%2==0)&&(n>=4))cout<<(n+5)/6<<" "<<n/4<<endl;
         else cout<<-1<<endl;
     }
 }

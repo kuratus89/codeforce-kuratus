@@ -1,34 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define pb push_back
-using ll= long long;
-#define f(i,n) for(int i=0;i<n;i++)
-#define sorted(x) sort(x.begin(),x.end());
-#define rsorted(x) sort(x.rbegin(),x.rend());
-#define rev(x) reverse(x.begin(),x.end());
-typedef vector<int> vi;
-typedef vector<long long> vll;
-typedef vector<vi> vvi;
-typedef vector<vll> vvll;
-typedef pair<int, int> pii;
-typedef vector<pair<int, int>> vpii;
-typedef unordered_map<int, int> umap_ii;
-typedef unordered_map<ll, ll> umap_ll;
-typedef unordered_map<string, int> umap_si;
-int main(){ 
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    //code-->>
-    ll n; cin>>n;
-    ll m;cin>>m;
-    vll a(n);
-    vll b(m);
-    f(i,n)cin>>a[i];
-    f(i,m)cin>>b[i];
-    vll ans(n+m);
-    merge(a.begin(),a.end(),b.begin(),b.end(),ans.begin());
+int main(){
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    //cf id->kuratus
+    //email -> kuratus89@gmail.com
+    //your code stars here =>
+    long long a,b;cin>>a>>b;
+    queue<long long> veca , vecb;
+    for(long long i=0 ; i<a ; i++){
+        long long temp;cin>>temp;
+        veca.push(temp);
+    }
+    for(long long i=0 ; i<b ; i++){
+        long long temp;cin>>temp;
+        vecb.push(temp);
+    }
+    vector<long long> vec;
+    while((!veca.empty())&&(!vecb.empty())){
+        if(veca.front()<vecb.front()){
+            vec.push_back(veca.front());
+            veca.pop();
+        }
+        else {
+            vec.push_back(vecb.front());
+            vecb.pop();
 
-    f(i,n+m)cout<<ans[i]<<" ";
+        }
+    }
+    while(!veca.empty()){
+        vec.push_back(veca.front());
+        veca.pop();
+    }
+    while(!vecb.empty()){
+        vec.push_back(vecb.front());
+        vecb.pop();
+    }
+    for(long long val:vec)cout<<val<<" ";
+    cout<<endl;
+
     
-
-}   
+}

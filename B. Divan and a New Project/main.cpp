@@ -1,37 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define pb push_back
-using ll= long long;
-#define f(i,n) for(int i=0;i<n;i++)
-#define sorted(x) sort(x.begin(),x.end());
-#define rsorted(x) sort(x.rbegin(),x.rend());
-#define rev(x) reverse(x.begin(),x.end());
-typedef vector<int> vi;
-typedef vector<long long> vll;
-typedef vector<vi> vvi;
-typedef vector<vll> vvll;
-typedef pair<int, int> pii;
-typedef vector<pair<int, int>> vpii;
-typedef unordered_map<int, int> umap_ii;
-typedef unordered_map<ll, ll> umap_ll;
-typedef unordered_map<string, int> umap_si;
-int main(){ 
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    //code-->>
+int main(){
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    //cf id->kuratus
+    //email -> kuratus89@gmail.com
+    //your code stars here =>
     long long tt;cin>>tt;
     while(tt--){
         long long n;cin>>n;
-        vector<pair<long long , long long>> tim(n);
-        for(long long i=0 ; i<n ; i++){
-            cin>>tim[i].first;
-            tim[i].second = i;
+        vector<long long> vec(n);
+        for(long long i=0 ; i<n;  i++)cin>>vec[i];
+        priority_queue<pair<long long , long long>> qe;
+        for(long long i=0 ; i<n; i++)qe.push({vec[i] , i+1});
+        vector<long long> ans(n+1);
+        ans[0]=0;
+        long long ano=0 , l=-1 , r=1;
+
+        while(!qe.empty()){
+            long long  in = qe.top().second;
+            ans[in]=r;
+            ano += 2LL * r * vec[in-1];
+
+            r++;
+            qe.pop();
+            
+            if(qe.empty())break;
+            in = qe.top().second;
+            ans[in]=l;
+            ano += 2LL*(-l)*vec[in-1];
+            l--;
+            
+            qe.pop();
         }
-        vector<long long> ans(n);
-        sort(tim.begin() , tim.end());
-        reverse(tim.begin() , tim.end());
-        long long left=-1
+        cout<<ano<<endl;
+        for(auto val:ans)cout<<val<<" ";
+        cout<<endl;
     }
     
-
-}   
+    
+}
