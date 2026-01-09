@@ -8,19 +8,26 @@ int main(){
     long long tt;cin>>tt;
     while(tt--){
         long long n,k;cin>>n>>k;
-        map<long long , long long> ma;
-        vector<long long>vec(n);
-        for(long long i=0 ; i<n;  i++)cin>>vec[i];
-        for(long long i=0 ; i<n ; i++)ma[vec[i]]++;
-        long long ans=0;
-        for(auto val:ma){
-            if(val.second>=k)ans++;
+        vector<long long> vec(n);
+        for(long long i=0 ; i<n; i++)cin>>vec[i];
+        long long itf=0 , cnf=0;
+        for(long long i=0 ; (i<n)&&(cnf<k); i++){
+            if(vec[i]==vec[0]){
+                itf = i;
+                cnf++;
+            }
         }
-        bool ano=1;
-        if(ma[vec[0]]<k)ano=0;
-        if(ma[vec[n-1]]<k)ano=0;
-        // if(ans<k)ano=0;
-        if(ano)cout<<"YES";
+        long long itl=n-1 , cnl=0;
+        for(long long i=n-1 ; (i>=0)&&(cnl<k); i--){
+            if(vec[i]==vec[n-1]){
+                itl=i;
+                cnl++;
+            }
+        }
+        bool ans=0;
+        if((cnf==k)&&(cnl==k)&&(itf<=itl))ans=1;
+        if((vec[0]==vec[n-1])&&(cnf==k))ans=1;
+        if(ans)cout<<"YES";
         else cout<<"NO";
         cout<<endl;
     }
